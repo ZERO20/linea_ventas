@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Tree view -->
+        <record id="view_sale_line_tree" model="ir.ui.view">
+            <field name="name">web_sales.sale_line.tree</field>
+            <field name="model">web_sales.sale_line</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Sales Line" create="1" delete="1" edit="1">                    
+                    <field name="customer_id" />                    
+                    <field name="create_date"/>                    
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form view -->
+        <record id="view_sale_line_form" model="ir.ui.view">
+            <field name="name">web_sales.sale_line.tree</field>
+            <field name="model">web_sales.sale_line</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Sale Line" create="1" delete="1" edit="1">
+                    <sheet>
+                        <group>                        
+                            <field name="customer_id" />
+                        </group>
+                        
+                        <notebook>
+                            <page string="Prepaid">
+                                <field name="prepaid_ids">
+                                    <form string="Prepaid">
+                                        <sheet>
+                                            <group name="prepaid" string="Prepaid">
+                                                <field name="product_id"/>
+                                                <field name="serial_number_id"/>
+                                                <field name="contract_number"/>
+                                                <field name="price"/>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    
+                                    <tree string="Prepaid">
+                                        <field name="product_id"/>
+                                        <field name="serial_number_id"/>
+                                        <field name="contract_number"/>
+                                        <field name="price"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Plan">
+                                <field name="plan_ids">
+                                    <form string="Plan">
+                                        <sheet>
+                                            <group name="plan" string="Plan">
+                                                <field name="service_id"/>
+                                                <field name="monthly_rent_price"/>
+                                                <field name="months"/>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    
+                                    <tree string="Plan">
+                                        <field name="service_id"/>
+                                        <field name="monthly_rent_price"/>
+                                        <field name="months"/>
+                                        <field name="total_rent"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Activation">
+                                <field name="activation_ids">
+                                    <form string="Activation">
+                                        <sheet>
+                                            <group name="activation" string="Activation">
+                                                <field name="service_id"/>
+                                                <field name="product_id"/>
+                                                <field name="serial_number_id"/>
+                                                <field name="contract_number"/>
+                                                <field name="monthly_rent_price"/>
+                                                <field name="equipment_protection"/>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                    
+                                    <tree string="Activation">                                    
+                                        <field name="service_id"/>
+                                        <field name="product_id"/>
+                                        <field name="serial_number_id"/>
+                                        <field name="contract_number"/>
+                                        <field name="monthly_rent_price"/>
+                                        <field name="equipment_protection"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- action for the menuitem -->
+        <record id="sale_line_action" model="ir.actions.act_window">
+            <field name="name">Sales Line</field>
+            <field name="res_model">web_sales.sale_line</field>
+            <field name="view_type">form</field>
+            <field name='view_mode'>tree,form</field>
+            <field name='view_id' ref='view_sale_line_tree'/>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add new Sales Line
+                </p>
+            </field>
+        </record>
+
+        <!-- menuitem -->
+        <menuitem
+            id="sale_line_menu"
+            name="Sales line"
+            action="sale_line_action"
+            parent=""
+            sequence="1" />
+    </data>
+</odoo>
